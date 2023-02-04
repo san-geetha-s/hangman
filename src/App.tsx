@@ -7,13 +7,13 @@ import words from './wordList.json'
 // import reactLogo from './assets/react.svg'
 // import './App.css'
 
-
+function getWord() {
+  return words[Math.floor(Math.random()*words.length)]
+  
+} 
 
 function App() {
-  const [wordToGuess,setWordToGuess] =useState(()=>{
-
-    return words[Math.floor(Math.random()*words.length)]
-  })
+  const [wordToGuess,setWordToGuess] =useState(getWord )
 
 
  const [guessedLetters,setGuessedLetters]=useState<String[]>([
@@ -51,6 +51,24 @@ function App() {
   }
 
  },[guessedLetters])
+
+ useEffect(()=>{
+  const handler=(e: KeyboardEvent)=>{
+    const key = e.key
+
+    if(key !=='Enter') 
+
+   return
+   e.preventDefault()
+   setGuessedLetters([])
+   setWordToGuess(getWord())
+  }
+  document.addEventListener("keypress",handler)
+  return()=>{
+    document.removeEventListener("keypress",handler)
+  }
+
+ },[])
 
   return(
     <div style={{
