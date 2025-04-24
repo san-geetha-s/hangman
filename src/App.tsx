@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { HangmanDrawing } from './HangmanDrawing'
 import { HangmanWord } from './HangmanWord'
 import { Keyboard } from './Keyboard'
+import {CongratulationBlast} from './CongratulationBlast'
 
 import words from './wordList.json'
 // import reactLogo from './assets/react.svg'
@@ -77,28 +78,32 @@ function App() {
       flexDirection:'column',
       gap:'2rem',
       margin:'0 auto',
-      alignItems:'center'
-    }}>
+      alignItems:'center',
+  
+      
+     }}>
       <div style={{fontSize:'2rem',textAlign:'center'}}>
-        {isWinner && "winner! - Refresh to try again"}
+        {isWinner && <CongratulationBlast/>}
         {isLoser && "Nice Try - Refresh to try again"}
       </div>
 
-    <HangmanDrawing numberOfGuesses={incorrectLetters.length}/>
-    <HangmanWord reveal={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
-    <div style={{alignSelf:'stretch'}}>
-    <Keyboard
-    disabled={isLoser || isWinner}
-    activeLetters={guessedLetters.filter(letter =>
-      wordToGuess.includes(letter))}
-      inactiveLetters={incorrectLetters}
-      addGuessedLetter={addGuessedLetter}
+      <HangmanDrawing numberOfGuesses={incorrectLetters.length}/>
+      <HangmanWord reveal={isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess}/>
+     <div style={{alignSelf:'stretch'}}>
+       <Keyboard
+     
+       disabled={isLoser || isWinner}
+       activeLetters={guessedLetters.filter(letter =>
+        wordToGuess.includes(letter))}
+        inactiveLetters={incorrectLetters}
+       addGuessedLetter={addGuessedLetter}
 
-    />
-    </div>
+       />
+      
+      </div>
     
 
-    </div>
+     </div>
    
     
   )
@@ -107,3 +112,5 @@ function App() {
 }
 
 export default App
+
+//toggle to shift night mode in a react and typesctipt project
